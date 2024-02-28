@@ -40,6 +40,8 @@
 #include "kinematics.h"
 #endif
 
+#include <stdio.h>
+
 #if ENABLE_BACKLASH_COMPENSATION
 
 static float target_prev[N_AXIS] = {0};
@@ -85,8 +87,10 @@ bool mc_line (float *target, plan_line_data_t *pl_data)
 
     // If enabled, check for soft limit violations. Placed here all line motions are picked up
     // from everywhere in Grbl.
-    if(!(pl_data->condition.target_validated && pl_data->condition.target_valid))
+    limits_soft_check(target, pl_data->condition);
+    if(!(pl_data->condition.target_validated && pl_data->condition.target_valid)) {
         limits_soft_check(target, pl_data->condition);
+    }
 
     // If in check gcode mode, prevent motion by blocking planner. Soft limits still work.
     if(state_get() != STATE_CHECK_MODE && protocol_execute_realtime()) {

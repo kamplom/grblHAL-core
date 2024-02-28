@@ -794,7 +794,12 @@ PROGMEM static const setting_descr_t setting_descr[] = {
     { Setting_NGCDebugOut, "Example: (debug, metric mode: #<_metric>, coord system: #5220)" },
 #endif
     { Setting_EncoderSpindle, "Specifies which spindle has the encoder attached." },
-    { Setting_FSOptions, "Auto mount SD card on startup." }
+    { Setting_FSOptions, "Auto mount SD card on startup." },
+    { Setting_MQTTBrokerIpAddress, "MQTT broker Ip Address." },
+    { Setting_MQTTBrokerPort, "MQTT broker port." },
+    { Setting_MQTTBrokerUserName, "MQTT broker username." },
+    { Setting_MQTTBrokerPassword, "MQTT broker password." },
+    { Setting_Wifi_AP_BSSID, "Wifi AP BSSID." }
 };
 
 #endif

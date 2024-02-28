@@ -377,7 +377,7 @@ triggering a hard limit when the machine disengages from the switch.
 <br>__NOTE:__ This option has no effect if SOFTWARE_DEBOUNCE is enabled.
 */
 #if !defined HARD_LIMIT_FORCE_STATE_CHECK || defined __DOXYGEN__
-#define HARD_LIMIT_FORCE_STATE_CHECK Off // Default disabled. Set to \ref On or 1 to enable.
+#define HARD_LIMIT_FORCE_STATE_CHECK On // Default disabled. Set to \ref On or 1 to enable.
 #endif
 
 /*! @name Homing cycle search and locate scalars
@@ -883,7 +883,7 @@ disabling pull-up for only a few pins. See above for other signal definitions.
 */
 ///@{
 #if !defined DEFAULT_DISABLE_CONTROL_PINS_PULL_UP_MASK || defined __DOXYGEN__
-#define DEFAULT_DISABLE_CONTROL_PINS_PULL_UP_MASK 0 // Set to SIGNALS_BITMASK or -1 to invert all signals
+#define DEFAULT_DISABLE_CONTROL_PINS_PULL_UP_MASK -1 // Set to SIGNALS_BITMASK or -1 to invert all signals
 #endif
 ///@}
 
@@ -898,7 +898,7 @@ are used the logic of the input signals should be be inverted with the \ref axis
 */
 ///@{
 #if !defined DEFAULT_LIMIT_SIGNALS_INVERT_MASK || defined __DOXYGEN__
-#define DEFAULT_LIMIT_SIGNALS_INVERT_MASK 0 // Set to -1 or AXES_BITMASK to invert for all axes
+#define DEFAULT_LIMIT_SIGNALS_INVERT_MASK 5 // Set to -1 or AXES_BITMASK to invert for all axes
 #endif
 ///@}
 
@@ -933,7 +933,7 @@ simply message the user to check the limits and enter an alarm state, rather tha
 not throw an alarm message.
 */
 #if !defined DEFAULT_HARD_LIMIT_ENABLE || defined __DOXYGEN__
-#define DEFAULT_HARD_LIMIT_ENABLE Off
+#define DEFAULT_HARD_LIMIT_ENABLE On
 #endif
 #if !defined DEFAULT_CHECK_LIMITS_AT_INIT || defined __DOXYGEN__
 #define DEFAULT_CHECK_LIMITS_AT_INIT Off
@@ -1244,7 +1244,7 @@ Requires homing cycles to be defined by \ref DEFAULT_HOMING_CYCLE_0 - \ref DEFAU
 */
 ///@{
 #if !defined DEFAULT_HOMING_ENABLE || defined __DOXYGEN__
-#define DEFAULT_HOMING_ENABLE Off // Default disabled. Set to \ref On or 1 to enable.
+#define DEFAULT_HOMING_ENABLE On // Default disabled. Set to \ref On or 1 to enable.
 #endif
 
 /*! /def DEFAULT_HOMING_SINGLE_AXIS_COMMANDS
@@ -1255,8 +1255,9 @@ If you have a two-axis machine, _DON'T USE THIS_. Instead, just alter the homing
 \internal Bit 1 in settings.homing.flags.
 */
 #if !defined DEFAULT_HOMING_SINGLE_AXIS_COMMANDS || defined __DOXYGEN__
-#define DEFAULT_HOMING_SINGLE_AXIS_COMMANDS Off // Default disabled. Set to \ref On or 1 to enable.
+#define DEFAULT_HOMING_SINGLE_AXIS_COMMANDS On // Default disabled. Set to \ref On or 1 to enable.
 #endif
+
 
 /*! /def DEFAULT_HOMING_INIT_LOCK
 \brief
@@ -1332,7 +1333,7 @@ Unset bits in the mask results in movement in positive direction.
 */
 ///@{
 #if !defined DEFAULT_HOMING_DIR_MASK || defined __DOXYGEN__
-#define DEFAULT_HOMING_DIR_MASK 0
+#define DEFAULT_HOMING_DIR_MASK 1
 #endif
 ///@}
 
@@ -1340,7 +1341,7 @@ Unset bits in the mask results in movement in positive direction.
 */
 ///@{
 #if !defined DEFAULT_HOMING_FEED_RATE || defined __DOXYGEN__
-#define DEFAULT_HOMING_FEED_RATE 25.0f // mm/min
+#define DEFAULT_HOMING_FEED_RATE 100.0f // mm/min
 #endif
 ///@}
 
@@ -1348,7 +1349,7 @@ Unset bits in the mask results in movement in positive direction.
 */
 ///@{
 #if !defined DEFAULT_HOMING_SEEK_RATE || defined __DOXYGEN__
-#define DEFAULT_HOMING_SEEK_RATE 500.0f // mm/min
+#define DEFAULT_HOMING_SEEK_RATE 1000.0f // mm/min
 #endif
 ///@}
 
@@ -1401,7 +1402,7 @@ greater.
 */
 ///@{
 #if !defined DEFAULT_HOMING_CYCLE_0 || defined __DOXYGEN__
-#define DEFAULT_HOMING_CYCLE_0 (Z_AXIS_BIT)             // REQUIRED: First move Z to clear workspace.
+#define DEFAULT_HOMING_CYCLE_0 (X_AXIS_BIT)             // REQUIRED: First move Z to clear workspace.
 #endif
 ///@}
 
@@ -1412,7 +1413,7 @@ greater.
 #if COREXY
 #define DEFAULT_HOMING_CYCLE_1 (X_AXIS_BIT)             // OPTIONAL: Then move X.
 #else
-#define DEFAULT_HOMING_CYCLE_1 (X_AXIS_BIT|Y_AXIS_BIT)  // OPTIONAL: Then move X,Y at the same time.
+#define DEFAULT_HOMING_CYCLE_1 0  // OPTIONAL: Then move X,Y at the same time.
 #endif
 #endif
 ///@}
@@ -1460,7 +1461,7 @@ greater.
 */
 ///@{
 #if !defined DEFAULT_PROBE_SIGNAL_INVERT || defined __DOXYGEN__
-#define DEFAULT_PROBE_SIGNAL_INVERT Off
+#define DEFAULT_PROBE_SIGNAL_INVERT On
 #endif
 ///@}
 
@@ -1758,7 +1759,7 @@ Timezone offset from UTC in hours, allowed range is -12.0 - 12.0.
  */
 ///@{
 #if !defined DEFAULT_X_STEPS_PER_MM || defined __DOXYGEN__
-#define DEFAULT_X_STEPS_PER_MM 250.0f
+#define DEFAULT_X_STEPS_PER_MM 26.667f
 #endif
 #if !defined DEFAULT_Y_STEPS_PER_MM || defined __DOXYGEN__
 #define DEFAULT_Y_STEPS_PER_MM 250.0f
@@ -1813,11 +1814,11 @@ Timezone offset from UTC in hours, allowed range is -12.0 - 12.0.
 #endif
 ///@}
 
-/*! @name 12x - Setting_AxisAcceleration
+/*! @name $12x - Setting_AxisAcceleration
 */
 ///@{
 #if !defined DEFAULT_X_ACCELERATION || defined __DOXYGEN__
-#define DEFAULT_X_ACCELERATION 10.0f // mm/sec^2
+#define DEFAULT_X_ACCELERATION 500.0f // mm/sec^2
 #endif
 #if !defined DEFAULT_Y_ACCELERATION || defined __DOXYGEN__
 #define DEFAULT_Y_ACCELERATION 10.0f // mm/sec^2
